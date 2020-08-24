@@ -48,5 +48,5 @@ steps:
 
 
 # Best effort is to check whether the package made it to Nexus
-- bash: if (test `npm view @de/frontend-collective-react-dnd-scrollzone@$(pkgVersion) -json | wc -l` -eq 0 );then >&2 echo "Error: could not find version in nexus"; fi
+- bash: if (test `npm view @de/frontend-collective-react-dnd-scrollzone@$(pkgVersion) -json | wc -l` -eq 0 );then >&2 echo "Error - could not find version in nexus"; fi
   failOnStderr: true
