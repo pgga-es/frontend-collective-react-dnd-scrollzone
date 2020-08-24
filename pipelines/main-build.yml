@@ -39,7 +39,7 @@ steps:
 
 - bash: echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> $(System.DefaultWorkingDirectory)/.npmrc
 
-- bash: echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> $(System.DefaultWorkingDirectory)/.npmrc
+- bash: echo "registry=https://nexus.wfmdev.com/nexus/content/repositories/eamx-npm-releases" >> $(System.DefaultWorkingDirectory)/.npmrc
 
 - bash: echo "scripts-prepend-node-path=true" >> $(System.DefaultWorkingDirectory)/.npmrc
   
