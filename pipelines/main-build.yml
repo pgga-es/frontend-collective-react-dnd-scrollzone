@@ -39,11 +39,12 @@ steps:
 # Not fail on Std Err here because of fsevent compilation (optional) failures
 - bash: yarn install
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'echo "always-auth=true" > $(System.DefaultWorkingDirectory)/.npmrc\n echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> $(System.DefaultWorkingDirectory)/.npmrc\n echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> $(System.DefaultWorkingDirectory)/.npmrc\n'
+#Create .npmrc file
+- bash: echo "always-auth=true" > $(System.DefaultWorkingDirectory)/.npmrc
 
+- bash: echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> $(System.DefaultWorkingDirectory)/.npmrc
+
+- bash: echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> $(System.DefaultWorkingDirectory)/.npmrc
   
 - bash: npm version --no-git-version $(pkgVersion)
   failOnStderr: true
