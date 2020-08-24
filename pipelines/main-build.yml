@@ -43,8 +43,10 @@ steps:
 
 - bash: echo "scripts-prepend-node-path=true" >> $(System.DefaultWorkingDirectory)/.npmrc
   
+- bash: npm version --no-git-version $(pkgVersion)
+
 # Can't fail on Stderr because the maintainer hasn't updated third party deps
-- bash: npm publish --new-version $(pkgVersion)
+- bash: npm publish 
 
 
 # Best effort is to check whether the package made it to Nexus
