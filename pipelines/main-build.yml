@@ -1,0 +1,53 @@
+# Main build for @webcore/frontend-collective-react-dnd-scrollzone
+# Modify major/minor/patch here for release versioning
+
+name: $(pkgVersion)
+trigger:
+  branches:
+    include:
+      - webcore-main
+  paths:
+    exclude:
+    - README.md
+    - CHANGELOG.md
+
+pool:
+  vmImage: 'macOS-latest'
+
+variables: 
+  - group: webcore-var-group
+  - name: major 
+    value: 1 
+  - name: minor 
+    value: 0 
+  - name: patch 
+    value: $[counter(format('{0}.{1}', variables['major'], variables['minor']), 0)] 
+  - name: pkgVersion 
+    value: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])] 
+
+steps:
+- checkout: self
+  persistCredentials: true
+
+- bash: echo Version $(pkgVersion)
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.18.x'
+  displayName: 'Install Node.js'
+  
+
+- bash: yarn install
+  failOnStderr: true
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'echo "always-auth=true" > .npmrc\n echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> .npmrc\n echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> .npmrc\n'
+
+  
+- bash: npm version --no-git-version ${pkgVersion}
+  failOnStderr: true
+
+- bash: yarn publish
+  failOnStderr: true
