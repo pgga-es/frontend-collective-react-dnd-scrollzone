@@ -46,12 +46,5 @@ steps:
 
 - bash: echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> $(System.DefaultWorkingDirectory)/.npmrc
   
-- bash: npm version --no-git-version $(pkgVersion)
-  failOnStderr: true
-
-- bash: pwd
-
-- bash: cat $(System.DefaultWorkingDirectory)/.npmrc
-
-- bash: npm publish
+- bash: yarn publish --new-version $(pkgVersion)
   failOnStderr: true
