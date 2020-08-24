@@ -31,11 +31,6 @@ steps:
 
 - bash: echo Version $(pkgVersion)
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.18.x'
-  displayName: 'Install Node.js'
-  
 # Not fail on Std Err here because of fsevent compilation (optional) failures
 - bash: yarn install
 
