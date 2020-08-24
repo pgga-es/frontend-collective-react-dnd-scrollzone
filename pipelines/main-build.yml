@@ -36,9 +36,8 @@ steps:
     versionSpec: '12.18.x'
   displayName: 'Install Node.js'
   
-
+# Not fail on Std Err here because of fsevent compilation (optional) failures
 - bash: yarn install
-  failOnStderr: true
 
 - task: Bash@3
   inputs:
