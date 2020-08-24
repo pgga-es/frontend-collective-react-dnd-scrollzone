@@ -45,8 +45,8 @@ steps:
     script: 'echo "always-auth=true" > .npmrc\n echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> .npmrc\n echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> .npmrc\n'
 
   
-- bash: npm version --no-git-version ${pkgVersion}
+- bash: npm version --no-git-version $(pkgVersion)
   failOnStderr: true
 
-- bash: yarn publish
+- bash: npm publish
   failOnStderr: true
