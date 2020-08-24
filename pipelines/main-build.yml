@@ -42,7 +42,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'echo "always-auth=true" > .npmrc\n echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> .npmrc\n echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> .npmrc\n'
+    script: 'echo "always-auth=true" > $(System.DefaultWorkingDirectory)/.npmrc\n echo "registry=https://nexus.wfmdev.com/nexus/content/groups/eamx-npm-all" >> $(System.DefaultWorkingDirectory)/.npmrc\n echo "_auth=\"$(NEXUS_AUTH_SECRET)\"" >> $(System.DefaultWorkingDirectory)/.npmrc\n'
 
   
 - bash: npm version --no-git-version $(pkgVersion)
