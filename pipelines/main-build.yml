@@ -48,5 +48,9 @@ steps:
 - bash: npm version --no-git-version $(pkgVersion)
   failOnStderr: true
 
+- bash: pwd
+
+- bash: cat $(System.DefaultWorkingDirectory)/.npmrc
+
 - bash: npm publish
   failOnStderr: true
